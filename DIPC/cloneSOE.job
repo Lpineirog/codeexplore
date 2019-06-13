@@ -1,0 +1,47 @@
+SQLcl
+Username system
+Password ZZ0r_cle#1
+Credentials File 
+Connect String 130.61.27.199:1521/dipcDB_fra1sz.dnslabel1.skynet.oraclevcn.com
+Source Inline SQL 
+SQL Statements grant imp_full_database,exp_full_database to soe;
+Role Default
+Restriction Level Default
+
+SQLcl
+Username system
+Password ZZ0r_cle#1
+Credentials File
+Connect String 130.61.21.210:1521/cepdb.dnslabel1.skynet.oraclevcn.com
+Source Inline SQL
+SQL Statements
+create public database link dipc connect to soe identified by ZZ0r_cle#1 using
+'130.61.27.199:1521/dipcDB_fra1sz.dnslabel1.skynet.oraclevcn.com';
+Role Default
+Restriction Level Default
+
+Unix Shell
+cp KEYS/privateKey . 
+chmod 600 privateKey
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i privateKey opc@130.61.21.210 -tt 'sudo cp /home/opc/.ssh/authorized_keys /home/oracle/.ssh/authorized_keys'
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i privateKey oracle@130.61.21.210 -tt 'impdp system/ZZ0r_cle#1@//130.61.21.210:1521/cepdb.dnslabel1.skynet.oraclevcn.com directory=DATA_PUMP_DIR logfile=soe.log schemas=SOE network_link=dipc'
+
+SQLcl
+Username soe
+Password ZZ0r_cle#1
+Credentials File 
+Connect String 130.61.27.199:1521/dipcDB_fra1sz.dnslabel1.skynet.oraclevcn.com
+Source Inline SQL 
+SQL Statements select count(customer_id), sum(customer_id) from soe.orders;
+Role Default
+Restriction Level Default
+
+SQLcl
+Username soe
+Password ZZ0r_cle#1
+Credentials File
+Connect String 130.61.21.210:1521/cepdb.dnslabel1.skynet.oraclevcn.com
+Source Inline SQL
+SQL Statements select count(customer_id), sum(customer_id) from soe.orders;
+Role Default
+Restriction Level Default

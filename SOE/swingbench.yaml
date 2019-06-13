@@ -1,0 +1,37 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "swingbenchdevcs",
+    "labels": {
+      "name": "codeexplore"
+    }
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "swingbench",
+        "image": "domgiles/swingbench",
+        "command": [
+          "oewizard",
+          "-cs",
+          "//130.61.106.246:1521/pdb2.sub05190914190.skynet.oraclevcn.com",
+          "-u",
+          "soe",
+          "-p",
+          "ZZ0r_cle#1",
+          "-cl",
+          "-create",
+          "-scale",
+          "0.1",
+          "-v",
+          "-ts",
+          "USERS",
+          "-dbap",
+          "ZZ0r_cle#1"
+        ]
+      }
+    ],
+    "restartPolicy": "Never"
+   }
+}

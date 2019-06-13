@@ -1,0 +1,4 @@
+Pipeline
+Job: cloneSOE
+Job: enableORDS.SOE.ORDERS
+Job: checkSOE
